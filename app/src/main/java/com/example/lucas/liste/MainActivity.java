@@ -34,13 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
         textureView = (TextureView) findViewById(R.id.texture);
         assert textureView != null;
-
-        camera = new Camera(this, textureView);
-        gps = new GPS(this);
-
-        permissionWrapper("GPS");
-        permissionWrapper("Camera");
-
         textureView.setSurfaceTextureListener(Camera.textureListener);
         takePictureButton = (Button) findViewById(R.id.btn_takepicture);
         assert takePictureButton != null;
@@ -50,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
                 camera.takePicture();
             }
         });
+
+        camera = new Camera(this, textureView);
+        gps = new GPS(this);
+
+        permissionWrapper("GPS");
+
+        // TODO: figure out why OpenCamera causes CreateCameraPreview to break
+        // permissionWrapper("Camera");
+
     }
 
     private void permissionWrapper(String perm) {
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         } else if (perm == "Camera") {
             if (!addPermission(permissionsList, Manifest.permission.CAMERA))
                 permissionsNeeded.add("Camera");
+            // if (!addPermission(permissionsList, Manifest.permission.INTERNET))
+            //     permissionsNeeded.add("Internet");
             if (!addPermission(permissionsList, Manifest.permission.WRITE_EXTERNAL_STORAGE))
                 permissionsNeeded.add("Write External Storage");
         }
