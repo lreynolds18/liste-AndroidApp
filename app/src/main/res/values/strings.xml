@@ -2,4 +2,7 @@
     <string name="app_name">Liste</string>
     <string name="take_picture">Take Picture</string>
     <string name="restapi">Call RESTAPI</string>
+    <string name="title_activity_shopping_list">ShoppingListActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>
