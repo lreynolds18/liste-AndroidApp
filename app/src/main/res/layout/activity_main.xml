@@ -13,14 +13,38 @@
         android:layout_above="@+id/btn_takepicture"
         android:layout_alignParentTop="true" />
 
-    <Button
-        android:id="@+id/btn_takepicture"
-        android:layout_width="wrap_content"
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayout02"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/take_picture"
-        />
+        android:layout_width="fill_parent"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/btn_takepicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/take_picture">
+        </Button>
+        <Button
+            android:id="@+id/btn_callrestapi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/restapi">
+        </Button>
+    </LinearLayout>
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_takepicture"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:text="@string/take_picture"-->
+        <!--/>-->
+
 </RelativeLayout>

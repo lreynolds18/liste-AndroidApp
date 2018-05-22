@@ -71,26 +71,46 @@ public class Camera {
     private static TextureView textureView;
 
     public Camera(Context mContext, TextureView textureView) {
+        /*
+        * Constructor Class
+        * mContext - Context from MainActivity
+        * textureView - TextureView where the camera input is viewed
+        * */
         this.mContext = mContext;
         this.textureView = textureView;
     }
 
     static TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
+
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-            //open your camera here
+            /*
+            * onSurfaceTextureAvailable - TODO
+            * */
             openCamera();
         }
+
         @Override
         public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+            /*
+             * onSurfaceTextureSizeChanged - TODO
+             * */
             // Transform you image captured size according to the surface width and height
         }
+
         @Override
         public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+            /*
+             * onSurfaceTextureDestroyed - TODO
+             * */
             return false;
         }
+
         @Override
         public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+            /*
+             * onSurfaceTextureUpdated - TODO
+             * */
         }
     };
 

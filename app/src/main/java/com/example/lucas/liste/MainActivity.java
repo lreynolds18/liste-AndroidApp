@@ -2,6 +2,8 @@ package com.example.lucas.liste;
 
 import com.example.lucas.liste.Camera.*;
 import com.example.lucas.liste.GPS.*;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -13,9 +15,17 @@ import android.util.Log;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
+// import cz.msebera.android.httpclient.entity.mime.Header;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     private Button takePictureButton;
+    private Button callRestAPIButton;
     private TextureView textureView;
     private Camera camera;
     private GPS gps;
@@ -44,6 +55,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        callRestAPIButton = (Button) findViewById(R.id.btn_callrestapi);
+        callRestAPIButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    getPublicTimeline();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         camera = new Camera(this, textureView);
         gps = new GPS(this);
 
@@ -51,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         // TODO: figure out why OpenCamera causes CreateCameraPreview to break
         // permissionWrapper("Camera");
-
     }
 
     private void permissionWrapper(String perm) {
@@ -116,6 +138,21 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Cancel", null)
                 .create()
                 .show();
+    }
+
+    public void getPublicTimeline() throws JSONException {
+        HttpUtils.get("listings/", null, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                System.out.println(response.toString());
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+        });
     }
 
     @Override
