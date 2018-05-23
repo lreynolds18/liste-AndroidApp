@@ -76,8 +76,8 @@ public class Camera {
         * mContext - Context from MainActivity
         * textureView - TextureView where the camera input is viewed
         * */
-        this.mContext = mContext;
-        this.textureView = textureView;
+        Camera.mContext = mContext;
+        Camera.textureView = textureView;
     }
 
     static TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {

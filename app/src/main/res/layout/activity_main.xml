@@ -10,13 +10,13 @@
         android:id="@+id/texture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_takepicture"
+        android:layout_above="@+id/LinearLayout"
         android:layout_alignParentTop="true" />
 
 
 
     <LinearLayout
-        android:id="@+id/LinearLayout02"
+        android:id="@+id/LinearLayout"
         android:layout_height="wrap_content"
         android:layout_width="fill_parent"
         android:layout_alignParentBottom="true">
@@ -28,11 +28,11 @@
             android:text="@string/take_picture">
         </Button>
         <Button
-            android:id="@+id/btn_callrestapi"
+            android:id="@+id/btn_toShoppingList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/restapi">
+            android:text="To Shopping List">
         </Button>
     </LinearLayout>
 

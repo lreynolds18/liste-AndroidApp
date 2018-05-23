@@ -7,6 +7,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -25,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
-// import cz.msebera.android.httpclient.entity.mime.Header;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     final private int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 124;
     private Button takePictureButton;
-    private Button callRestAPIButton;
+    private Button shoppingListButton;
     private TextureView textureView;
     private Camera camera;
     private GPS gps;
@@ -43,27 +43,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textureView = (TextureView) findViewById(R.id.texture);
+        textureView = findViewById(R.id.texture);
         assert textureView != null;
         textureView.setSurfaceTextureListener(Camera.textureListener);
-        takePictureButton = (Button) findViewById(R.id.btn_takepicture);
+        takePictureButton = findViewById(R.id.btn_takepicture);
         assert takePictureButton != null;
         takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                camera.takePicture();
+                Camera.takePicture();
             }
         });
 
-        callRestAPIButton = (Button) findViewById(R.id.btn_callrestapi);
-        callRestAPIButton.setOnClickListener(new View.OnClickListener() {
+        shoppingListButton = findViewById(R.id.btn_toShoppingList);
+        shoppingListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    getPublicTimeline();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                startActivity(new Intent(MainActivity.this, ShoppingListActivity.class));
             }
         });
 
@@ -116,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         if (perm == "GPS") {
             gps.startCollectingGPS();
         } else if (perm == "Camera") {
-            camera.openCamera();
+            Camera.openCamera();
         }
     }
 
@@ -124,8 +120,7 @@ public class MainActivity extends AppCompatActivity {
         if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
             permissionsList.add(permission);
             // Check for Rationale Option
-            if (!shouldShowRequestPermissionRationale(permission))
-                return false;
+            return shouldShowRequestPermissionRationale(permission);
         }
         return true;
     }
@@ -138,21 +133,6 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Cancel", null)
                 .create()
                 .show();
-    }
-
-    public void getPublicTimeline() throws JSONException {
-        HttpUtils.get("listings/", null, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                super.onSuccess(statusCode, headers, response);
-                System.out.println(response.toString());
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
-            }
-        });
     }
 
     @Override
