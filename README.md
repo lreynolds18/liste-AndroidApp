@@ -14,7 +14,7 @@ Parts of the project
 * Node.js REST API to connect Android App + future website/IoT scanner to Postgresql Database
 * Recommender system to suggest items to add to shopping list -- Playing around with reinforcement learning (https://www.kaggle.com/osbornep/reinforcement-learning-for-meal-planning-in-python/notebook)
 3. Website
-* TODO - could add front end to restapi
+* TODO - dashboard to show what's being bought/used (could add front end to restapi)
 4. IoT Scanner
 * TODO - something to figure out what groceries are being used / what's left in the cupboard/fridge.  Possibly raspberry pi w/ camera or android app
 
