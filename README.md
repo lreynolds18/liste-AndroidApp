@@ -19,3 +19,4 @@ Parts of the project
 * TODO - something to figure out what groceries are being used / what's left in the cupboard/fridge.  Possibly raspberry pi w/ camera or android app
 
 
+
